@@ -10,6 +10,7 @@ import os
 import os.path
 from os import path
 from yaspin import yaspin
+from yaspin.spinners import Spinners
 
 @click.group()
 def cli():
@@ -82,6 +83,7 @@ def wait():
     local = arrow.utcnow().to(settings.TIMEZONE)
 
     with yaspin() as spin:
+        spin.spinner = Spinners.christmas
         spin.text = "Waiting for today's contest %s" % release.humanize()
         while release.timestamp - local.timestamp > 0:
             time.sleep(1)

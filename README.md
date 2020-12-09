@@ -14,6 +14,14 @@ The rest are defaults and should be quite sensible. The `code.py.template`
 can be changed to whatever you like. It is a jinja2 template and can be
 modified to suit more parameters as needed.
 
+Create a python virtual environment and install dependencies with something like 
+
+```
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+```
+
 ## Commands
 The following commands are available
 
