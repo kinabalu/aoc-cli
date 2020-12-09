@@ -17,7 +17,7 @@ def cli():
 
 
 def get_cookie_dict():
-    expires = "Thu, 09 Dec 2021 01:21:08 GMT"   # fix this to be a year from current time
+    expires = arrow.utcnow().format('ddd, DD MMM YYYY HH:mm:ss') + ' GMT'
     return dict(session="{session_key}; Path=/; Domain={aoc_domain}; Expires={expires};".format(
         session_key=settings.SESSION_KEY,
         aoc_domain=settings.AOC_DOMAIN,
@@ -43,7 +43,7 @@ def setup_code_file(year, day, overwrite_existing=False):
         code_file.write(outputText)
 
 
-def download_data(year, day):
+def download_data(year, day, overwrite_existing=False):
     try:
         os.makedirs(settings.DATA_PATH.format(year=year))
     except FileExistsError:
@@ -54,16 +54,17 @@ def download_data(year, day):
     with open(get_path_to_data(year=year, day=day), 'w') as download_file:
         download_file.write(r.text)
 
-    setup_code_file(year=year, day=day)
+    setup_code_file(year=year, day=day, overwrite_existing=overwrite_existing)
 
 
 @click.command()
 @click.argument("day")
 @click.option('--year', default=arrow.utcnow().year, help='Year to pull from')
-def download(year, day):
+@click.option('--overwrite_existing', default=False, type=bool, help='Should we overwrite an existing code file')
+def download(year, day, overwrite_existing):
     print("Downloading input for day %s" % day)
 
-    download_data(year, day)
+    download_data(year, day, overwrite_existing)
 
 
 @click.command()
@@ -103,13 +104,6 @@ def view(year, day):
     print(r.text)
 
 
-@click.command()
-def login():
-    setup_code_file(2020, '8')
-    print("Unnececessary, just add session cookie to config!")
-
-
-cli.add_command(login)
 cli.add_command(view)
 cli.add_command(download)
 cli.add_command(wait)
