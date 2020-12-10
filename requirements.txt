@@ -3,3 +3,5 @@ click==7.1.2
 Jinja2==2.11.2
 requests==2.25.0
 yaspin==1.2.0
+pyfiglet==0.8.post1
+PyInquirer==1.0.3

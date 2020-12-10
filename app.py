@@ -12,6 +12,8 @@ from os import path
 from yaspin import yaspin
 from yaspin.spinners import Spinners
 
+from pyfiglet import Figlet
+
 @click.group()
 def cli():
     pass
@@ -112,4 +114,6 @@ cli.add_command(wait)
 
 
 if __name__ == '__main__':
+    f = Figlet(font='isometric4')
+    print(f.renderText('AoC'))
     cli()

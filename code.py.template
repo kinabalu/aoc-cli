@@ -1,12 +1,6 @@
-def read_input():
-    with open('{{code_path}}') as reader:
-        return [line.strip() for line in reader]
+with open('{{code_path}}') as reader:
+    data = [line.strip() for line in reader]
 
+print(data)
 
-def main():
-    data = read_input()
-    print(data)
-    # Start writing!!
-
-if __name__ == '__main__':
-    main()
+# Start writing!!
