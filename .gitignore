@@ -3,3 +3,5 @@ local_settings.py
 .idea
 __pycache__
 data
+copy_data.sh
+[0-9][0-9].py
